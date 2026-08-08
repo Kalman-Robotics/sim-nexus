@@ -29,8 +29,8 @@ from kalman import config
 # usuario no pasa x_pose/y_pose: cada mundo tiene su propia zona despejada y un
 # unico valor fijo dejaria al robot encajado contra un edificio o una pared.
 SPAWN_POR_MUNDO = {
+    'laboratorio_real.world': ('0.0', '0.0'),     # centro del recinto: 0.25 m de holgura
     'laboratorio.world': ('-0.15', '-0.89'),      # calle al este de la ciudad
-    'laboratorio_real.world': ('0.0', '0.0'),     # centro del recinto de 1.5 m
 }
 SPAWN_POR_DEFECTO = ('0.0', '0.0')
 
@@ -144,7 +144,7 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument(
             name='world',
-            default_value='laboratorio.world',
+            default_value='laboratorio_real.world',
             description='World file name'
         ),
         IncludeLaunchDescription(

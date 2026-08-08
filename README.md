@@ -66,21 +66,23 @@ Lanza la simulación:
 ros2 launch kalman_gazebo simulation.launch.py
 ```
 
-El NEXUS aparece en el **laboratorio** (`laboratorio.world`), la maqueta de ciudad
-sobre el tapete de 2,5 × 2,5 m. Es el mundo que usan los cursos.
+El NEXUS aparece en el **laboratorio** (`laboratorio_real.world`), la réplica de la
+pista física de Kalman: un recinto de 1,45 × 1,55 m con paredes de 30 cm y cuatro
+edificios. **Es el mundo del curso**: lo que pruebes aquí es lo que después vas a
+correr sobre el robot real, así que las distancias y los obstáculos son los mismos.
 
-Puedes elegir otro mundo con el argumento `world`:
+Los demás mundos son escenarios extra para experimentar:
 
 ```bash
-ros2 launch kalman_gazebo simulation.launch.py world:=laboratorio_real.world
+ros2 launch kalman_gazebo simulation.launch.py world:=laboratorio.world
 ros2 launch kalman_gazebo simulation.launch.py world:=living_room.world
 ros2 launch kalman_gazebo simulation.launch.py world:=vacio.world
 ```
 
 | Mundo | Qué es |
 | --- | --- |
-| `laboratorio.world` | **(por defecto)** maqueta de ciudad sobre el tapete de 2,5 m, con ~20 edificios |
-| `laboratorio_real.world` | réplica del recinto físico del laboratorio (1,45 × 1,55 m) con 4 edificios |
+| `laboratorio_real.world` | **(por defecto)** la pista real: recinto de 1,45 × 1,55 m con 4 edificios |
+| `laboratorio.world` | maqueta de ciudad sobre un tapete de 2,5 m, con ~20 edificios |
 | `living_room.world` | sala de estar con muebles (y sus variantes `living_room2..4`) |
 | `vacio.world`, `empty_world.world` | suelo desnudo, para probar el robot sin obstáculos |
 
