@@ -66,11 +66,29 @@ Lanza la simulación:
 ros2 launch kalman_gazebo simulation.launch.py
 ```
 
-Puedes elegir el mundo con el argumento `world`:
+El NEXUS aparece en el **laboratorio** (`laboratorio.world`), la maqueta de ciudad
+sobre el tapete de 2,5 × 2,5 m. Es el mundo que usan los cursos.
+
+Puedes elegir otro mundo con el argumento `world`:
 
 ```bash
-ros2 launch kalman_gazebo simulation.launch.py world:=laboratorio.world
+ros2 launch kalman_gazebo simulation.launch.py world:=laboratorio_real.world
+ros2 launch kalman_gazebo simulation.launch.py world:=living_room.world
 ros2 launch kalman_gazebo simulation.launch.py world:=vacio.world
+```
+
+| Mundo | Qué es |
+| --- | --- |
+| `laboratorio.world` | **(por defecto)** maqueta de ciudad sobre el tapete de 2,5 m, con ~20 edificios |
+| `laboratorio_real.world` | réplica del recinto físico del laboratorio (1,45 × 1,55 m) con 4 edificios |
+| `living_room.world` | sala de estar con muebles (y sus variantes `living_room2..4`) |
+| `vacio.world`, `empty_world.world` | suelo desnudo, para probar el robot sin obstáculos |
+
+El robot arranca en un punto despejado propio de cada mundo. Si quieres otro,
+pásalo a mano:
+
+```bash
+ros2 launch kalman_gazebo simulation.launch.py x_pose:=-0.9 y_pose:=0.4
 ```
 
 Para cerrar la simulación, presiona `Ctrl+C` en la terminal.

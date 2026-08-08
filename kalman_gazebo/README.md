@@ -18,9 +18,15 @@ Lanza la simulación de Gazebo con el robot Kalman.
 - `use_sim_time`: Usar reloj de simulación (Gazebo) si es verdadero (default: `true`)
   - Valores aceptados: `true`, `false`
 - `robot_model`: Nombre del paquete de descripción del robot (default: vacío, usa configuración)
-- `x_pose`: Posición inicial X del robot (default: `-2.0`)
-- `y_pose`: Posición inicial Y del robot (default: `-0.5`)
-- `world`: Nombre del archivo de mundo (default: `living_room.world`)
+- `x_pose`: Posición inicial X del robot (default: vacío, usa el punto libre del mundo elegido)
+- `y_pose`: Posición inicial Y del robot (default: vacío, usa el punto libre del mundo elegido)
+- `world`: Nombre del archivo de mundo (default: `laboratorio.world`)
+
+Cada mundo tiene su zona despejada, así que el punto de arranque sale de la tabla
+`SPAWN_POR_MUNDO` del propio launch: `laboratorio.world` arranca en `(-0.15, -0.89)`,
+una calle al este de la ciudad, y `laboratorio_real.world` en `(0.0, 0.0)`, el centro
+del recinto de 1,45 × 1,55 m. Pasar `x_pose`/`y_pose` a mano tiene prioridad sobre
+esa tabla.
 
 ### `self_drive_gazebo.launch.py`
 Lanza el nodo de evitación de obstáculos simple para Gazebo. Se suscribe a LaserScan y Odometry (yaw), publica velocidad. Cada 10 ms elige un estado (avanzar, girar izquierda, girar derecha) según los umbrales "check.angle" y "check.distance" y publica las velocidades correspondientes. 
@@ -31,7 +37,7 @@ Lanza el nodo de evitación de obstáculos simple para Gazebo. Se suscribe a Las
 ## Uso
 Para lanzar la simulación de Gazebo con el robot Kalman, use el siguiente comando:
 ```
-ros2 launch kalman_gazebo simulation.launch.py robot_model:=kalman_description world:=laboratorio_real.world
+ros2 launch kalman_gazebo simulation.launch.py robot_model:=kalman_description world:=laboratorio.world
 ```
 
 ## Aplicaciones

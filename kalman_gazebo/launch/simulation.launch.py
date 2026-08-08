@@ -25,12 +25,28 @@ from launch_ros.actions import Node
 from kalman import config
 
 
+# Punto de arranque libre de obstaculos para cada mundo. Se usa solo cuando el
+# usuario no pasa x_pose/y_pose: cada mundo tiene su propia zona despejada y un
+# unico valor fijo dejaria al robot encajado contra un edificio o una pared.
+SPAWN_POR_MUNDO = {
+    'laboratorio.world': ('-0.15', '-0.89'),      # calle al este de la ciudad
+    'laboratorio_real.world': ('0.0', '0.0'),     # centro del recinto de 1.5 m
+}
+SPAWN_POR_DEFECTO = ('0.0', '0.0')
+
+
 def make_nodes(context: LaunchContext, robot_model, use_sim_time, x_pose, y_pose, world):
     robot_model_str = context.perform_substitution(robot_model)
     use_sim_time_str = context.perform_substitution(use_sim_time)
     x_pose_str = context.perform_substitution(x_pose)
     y_pose_str = context.perform_substitution(y_pose)
     world_str = context.perform_substitution(world)
+
+    spawn_x, spawn_y = SPAWN_POR_MUNDO.get(world_str, SPAWN_POR_DEFECTO)
+    if len(x_pose_str) == 0:
+        x_pose_str = spawn_x
+    if len(y_pose_str) == 0:
+        y_pose_str = spawn_y
 
     if len(robot_model_str) == 0:
       robot_model_str = config.get_var('robot.model')
@@ -118,18 +134,17 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument(
             name='x_pose',
-            default_value='0.0',
-            description='Robot starting x position'
+            default_value='',
+            description='Robot starting x position (vacio: punto libre del mundo elegido)'
         ),
         DeclareLaunchArgument(
             name='y_pose',
-            default_value='0.0',
-            description='Robot starting y position'
+            default_value='',
+            description='Robot starting y position (vacio: punto libre del mundo elegido)'
         ),
         DeclareLaunchArgument(
             name='world',
-            default_value='living_room.world',
-            # default_value='empty_world.world',
+            default_value='laboratorio.world',
             description='World file name'
         ),
         IncludeLaunchDescription(
