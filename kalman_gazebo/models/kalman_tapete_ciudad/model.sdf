@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<sdf version='1.4'>
+  <model name='kalman_tapete_ciudad'>
+    <link name="link">
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>2.5 2.5 0.005</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://kalman_tapete_ciudad/material/script</uri>
+            <uri>model://kalman_tapete_ciudad/material/textures</uri>
+            <name>Custom/kalman_tapete_ciudad</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <static>1</static>
+    <allow_auto_disable>1</allow_auto_disable>
+  </model>
+</sdf>

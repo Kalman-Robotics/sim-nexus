@@ -1,0 +1,13 @@
+material Custom/kalman_poster
+{
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture textura.png
+			}
+		}
+	}
+}
