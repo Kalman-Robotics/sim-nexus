@@ -7,7 +7,7 @@
   - [Uso](#uso)
   - [Aplicaciones](#aplicaciones)
     - [Comando por Teclado](#comando-por-teclado)
-    - [Navegación Autónoma](#navegación-autónoma)
+    - [Conducción autónoma de ejemplo](#conducción-autónoma-de-ejemplo)
 
 ## Archivos Launch
 
