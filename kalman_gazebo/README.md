@@ -44,15 +44,21 @@ ros2 launch kalman_gazebo simulation.launch.py robot_model:=kalman_description w
 Para ejecutar las utilidades de los paquetes de Kalman, asegurese de configurar el argumento `use_sim_time` a `true` para sincronizar con el tiempo simulado de Gazebo.
 
 ### Comando por Teclado
-Para controlar el robot Kalman en la simulación de Gazebo usando el teclado, use el siguiente comando:
+Para conducir el robot con el teclado, en **otra terminal** (con la simulación ya
+corriendo):
 ```
-ros2 run kalman_teleop teleop_keyboard 
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+```
+Publica en `/cmd_vel`, que es el tópico que escucha el robot. La ventana de la
+terminal donde lo ejecutes tiene que estar enfocada para que registre las teclas.
+
+### Conducción autónoma de ejemplo
+Evitación de obstáculos simple, incluida en este paquete: lee `/scan`, elige entre
+avanzar o girar y publica en `/cmd_vel`.
+```
+ros2 launch kalman_gazebo self_drive_gazebo.launch.py
 ```
 
-### Navegación Autónoma
-Para lanzar la navegación autónoma en un entorno simulado, use el siguiente comando:
-```
-ros2 launch kalman_bringup navigation.launch.py use_sim_time:=false robot_model:=kalman_description slam:=False map:=/ros2_ws/src/kalman_bringup/map/living_room.yaml
-```
-
-![ejm navegación](images/navigation.png)
+> **Nota:** la navegación completa (Nav2, SLAM y mapas) vive en `kalman_bringup`, que
+> es parte del kit del robot real y **no está incluido en este repositorio de
+> simulación**.
